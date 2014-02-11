@@ -1,0 +1,233 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.form-error {
+			color: red;
+			font-size: 8pt;
+		}
+		
+		.form-label {
+			font-size: 9pt;
+		}
+	</ui:style>
+	<g:HorizontalPanel>
+		<g:Grid ui:field="table">
+			<g:row>
+				<g:customCell>
+					<g:Label addStyleNames="{style.form-label}">First Name*</g:Label>
+				</g:customCell>
+				<g:customCell>
+					<g:Image url="img/info.png" ui:field="firstNameInfo" />
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox ui:field="firstName"  />
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field="firstNameError" addStyleNames="{style.form-error}" />
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label addStyleNames="{style.form-label}">Surname*</g:Label>
+				</g:customCell>
+				<g:customCell>
+					<g:Image url="img/info.png" ui:field="surnameInfo" />
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox ui:field="surname"  />
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field="surnameError" addStyleNames="{style.form-error}" />
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:HorizontalPanel>
+						<g:Label addStyleNames="{style.form-label}">
+							Email* (
+				</g:Label>
+						<g:CheckBox ui:field="contactable" addStyleNames="{style.form-label}">contactable)</g:CheckBox>
+					</g:HorizontalPanel>
+				</g:customCell>
+				<g:customCell>
+					<g:Image url="img/info.png" ui:field="emailInfo" />
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox ui:field="email"  />
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field="emailError" addStyleNames="{style.form-error}" />
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label addStyleNames="{style.form-label}">Occupation</g:Label>
+				</g:customCell>
+				<g:cell/>
+				<g:customCell>
+					<g:TextBox ui:field="occupation"  />
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field="occupationError" addStyleNames="{style.form-error}" />
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label addStyleNames="{style.form-label}">Date of Birth* (dd/mm/yyyy)</g:Label>
+				</g:customCell>
+				<g:cell/>
+				<g:customCell>
+					<g:TextBox ui:field="dob" maxLength="10" />
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field="dobError" addStyleNames="{style.form-error}" />
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label addStyleNames="{style.form-label}">Number of Operations</g:Label>
+				</g:customCell>
+				<g:cell/>
+				<g:customCell>
+					<g:TextBox ui:field="operations" maxLength="3" />
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field="operationsError" addStyleNames="{style.form-error}" />
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label addStyleNames="{style.form-label}">Gender*</g:Label>
+				</g:customCell>
+				<g:cell/>
+				<g:customCell>
+					<g:HorizontalPanel>
+						<g:RadioButton ui:field="genderMale" name="gender"
+							addStyleNames="{style.form-label}">Male</g:RadioButton>
+						<g:RadioButton ui:field="genderFemale" name="gender"
+							addStyleNames="{style.form-label}">Female</g:RadioButton>
+					</g:HorizontalPanel>
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field="genderError" addStyleNames="{style.form-error}" />
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label addStyleNames="{style.form-label}">TCS Inheritance*</g:Label>
+				</g:customCell>
+				<g:customCell>
+					<g:Image url="img/info.png" ui:field="inheritanceInfo" />
+				</g:customCell>
+				<g:customCell>
+					<g:HorizontalPanel>
+						<g:RadioButton ui:field="inheritanceInherited" name="inheritance"
+							addStyleNames="{style.form-label}">Inherited</g:RadioButton>
+						<g:RadioButton ui:field="inheritanceSporadic" name="inheritance"
+							addStyleNames="{style.form-label}">Sporadic</g:RadioButton>
+					</g:HorizontalPanel>
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field="inheritanceError" addStyleNames="{style.form-error}" />
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label addStyleNames="{style.form-label}">About Me (max 500 chars)</g:Label>
+				</g:customCell>
+				<g:customCell>
+					<g:Image url="img/info.png" ui:field="userCommentsInfo" />
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox ui:field="userComments" />
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field="userCommentsError" addStyleNames="{style.form-error}" />
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label addStyleNames="{style.form-label}">Website URL</g:Label>
+				</g:customCell>
+				<g:cell/>
+				<g:customCell>
+					<g:TextBox ui:field="websiteUrl" />
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field="websiteUrlError" addStyleNames="{style.form-error}" />
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label addStyleNames="{style.form-label}">Address*</g:Label>
+				</g:customCell>
+				<g:customCell>
+					<g:Image url="img/info.png" ui:field="addressInfo" />
+				</g:customCell>
+				<g:customCell>
+					<g:SimplePanel ui:field="addressContainer" />
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field="addressError" addStyleNames="{style.form-error}" />
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label addStyleNames="{style.form-label}">Coordinates*</g:Label>
+				</g:customCell>
+				<g:cell/>
+				<g:customCell>
+					<g:HorizontalPanel spacing="3">
+						<g:Label ui:field="lat" />
+						<g:Label>,</g:Label>
+						<g:Label ui:field="lng" />
+					</g:HorizontalPanel>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label addStyleNames="{style.form-label}">Facebook ID</g:Label>
+				</g:customCell>
+				<g:cell/>
+				<g:customCell>
+					<g:TextBox ui:field="fbId" />
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label addStyleNames="{style.form-label}">Picture* (max 1Mb)</g:Label>
+				</g:customCell>
+				<g:customCell>
+					<g:Image url="img/info.png" ui:field="pictureInfo" />
+				</g:customCell>
+				<g:customCell>
+					<g:VerticalPanel ui:field="pictureUploadPanel"
+						spacing="2" />
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field="pictureError" addStyleNames="{style.form-error}" />
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label addStyleNames="{style.form-label}">Import Options</g:Label>
+				</g:customCell>
+				<g:cell/>
+				<g:customCell>
+					<g:Anchor ui:field="importDialogLink" href="javascript:;">Open Dialog</g:Anchor>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label addStyleNames="{style.form-label}">Dummy Values</g:Label>
+				</g:customCell>
+				<g:cell/>
+				<g:customCell>
+					<g:Anchor ui:field="dummyValuesJoBloggs" href="javascript:;">Jo Bloggs</g:Anchor>
+				</g:customCell>
+			</g:row>
+		</g:Grid>
+		<g:VerticalPanel ui:field="fbLoginContainer" />
+	</g:HorizontalPanel>
+</ui:UiBinder> 

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+	<context-param>
+		<!-- max size of the upload request -->
+		<param-name>maxSize</param-name>
+		<param-value>3145728</param-value>
+	</context-param>
+
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>adminServlet</servlet-name>
+		<servlet-class>org.tcsaroundtheworld.admin.server.AdminServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>submissionServlet</servlet-name>
+		<servlet-class>org.tcsaroundtheworld.submit.server.SubmissionServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>mapServlet</servlet-name>
+		<servlet-class>org.tcsaroundtheworld.map.server.MapServiceImpl</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>pictureUploadServlet</servlet-name>
+		<servlet-class>org.tcsaroundtheworld.submit.server.PictureUploadServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>pictureServlet</servlet-name>
+		<servlet-class>org.tcsaroundtheworld.common.server.PictureServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>awaitingApprovalsServlet</servlet-name>
+		<servlet-class>org.tcsaroundtheworld.admin.server.AwaitingApprovalsServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>adminServlet</servlet-name>
+		<url-pattern>/administrator/adminservice</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>submissionServlet</servlet-name>
+		<url-pattern>/submission/submissionservice</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>submissionServlet</servlet-name>
+		<url-pattern>/map/submissionservice</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>mapServlet</servlet-name>
+		<url-pattern>/map/mapservice</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet-mapping>
+		<servlet-name>pictureUploadServlet</servlet-name>
+		<url-pattern>/pictureupload</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>pictureServlet</servlet-name>
+		<url-pattern>/pictureserve</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>awaitingApprovalsServlet</servlet-name>
+		<url-pattern>/cron/awaitingapprovals</url-pattern>
+	</servlet-mapping>
+	
+
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>map.html</welcome-file>
+	</welcome-file-list>
+
+	<security-constraint>
+		<web-resource-collection>
+		    <web-resource-name>adminConstraint</web-resource-name>
+			<url-pattern>/administrator.html</url-pattern>
+			<url-pattern>/administrator-submission.html</url-pattern>
+			<url-pattern>/administrator/*</url-pattern>
+			<url-pattern>/cron/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+</web-app>

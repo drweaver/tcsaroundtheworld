@@ -1,0 +1,28 @@
+
+
+/** Most GWT widgets already have a style name defined 
+.gwt-DialogBox {
+  width: 400px;
+}
+.dialogVPanel {
+  margin: 5px;
+}
+*/
+
+img {  
+  border-style: none;
+}
+
+.userComments {
+  font-style: italic;
+  font-family: serif;
+}
+
+
+.person-info-name {
+  font-weight: bold;
+}
+
+.ui-widget-content {
+  border: none;
+}

@@ -1,0 +1,14 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder">
+	<ui:style>
+		.italic {
+			font-style: italic;
+		}
+	</ui:style>
+	<div>
+		<span ui:field="personInfo" />
+		<br/>
+		<span class='{style.italic}'><span ui:field="dateSubmitted"/></span>
+		<hr/>
+	</div>
+</ui:UiBinder>

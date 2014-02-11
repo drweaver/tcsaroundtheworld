@@ -1,0 +1,92 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+		
+		.blue-border {
+			border: medium;
+			border-color: blue;
+			border-style: solid;
+		}
+	</ui:style>
+	<g:HorizontalPanel spacing="5">
+
+		<g:Image url="img/arrow_down_right.png" />
+		<g:HorizontalPanel spacing="5" addStyleNames="{style.blue-border}">
+			<g:VerticalPanel spacing="3">
+				<g:HorizontalPanel>
+					<g:Label>Person ID=</g:Label>
+					<g:Label ui:field="id" width="20px" />
+				</g:HorizontalPanel>
+				<g:Button ui:field="jsonExport" text="Export to JSON" />
+				<g:Button ui:field="delete" text="Delete Person" />
+			</g:VerticalPanel>
+
+			<g:HorizontalPanel spacing="3">
+				<g:Label>Enabled</g:Label>
+				<g:CheckBox ui:field="enabled" />
+				<g:Image ui:field="loading" url="img/loading.gif" visible="false" />
+			</g:HorizontalPanel>
+
+
+			<g:VerticalPanel spacing="2" width="150px">
+				<g:HorizontalPanel>
+				<g:Label ui:field="name" /><g:HTML>&nbsp;</g:HTML><g:Label ui:field="surname" />
+				</g:HorizontalPanel>
+				<g:Label ui:field="email" />
+				<g:HorizontalPanel>
+				<g:Label>Contactable</g:Label>
+				<g:CheckBox ui:field="contactable" enabled="false"/>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+
+			<g:Label>Address=</g:Label>
+			<g:VerticalPanel width="150px">
+				<g:Label ui:field="city" />
+				<g:Label ui:field="state" />
+				<g:Label ui:field="country" />
+				<g:HorizontalPanel>
+				  <g:Label ui:field="lat" /><g:HTML>,</g:HTML><g:Label ui:field="lng" />
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label width="120px">Occupation=</g:Label>
+					<g:Label ui:field="occupation" width="150px" />
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label width="120px">DOB=</g:Label>
+					<g:Label ui:field="dob" />
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label width="120px">Gender=</g:Label>
+					<g:Label ui:field="gender" />
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label width="120px">Operations=</g:Label>
+					<g:Label ui:field="operations" />
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label width="120px">Inheritance=</g:Label>
+					<g:Label ui:field="inheritance" />
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label width="120px">User Comments=</g:Label>
+					<g:Label ui:field="userComments" />
+				</g:HorizontalPanel>
+				<g:Anchor ui:field="facebookUrl" target="_blank" visible="false">facebook profile link</g:Anchor>
+				<g:Anchor ui:field="websiteUrl" target="_blank" visible="false">website link</g:Anchor>
+			</g:VerticalPanel>
+
+			<g:VerticalPanel spacing="3">
+				<g:Image ui:field="picture" />
+				<g:Anchor ui:field="pictureDownload" visible="false"
+					text="Right-Click here to Download" />
+			</g:VerticalPanel>
+		</g:HorizontalPanel>
+	</g:HorizontalPanel>
+</ui:UiBinder> 

@@ -1,0 +1,14 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		
+	</ui:style>
+	<g:VerticalPanel>
+		<g:HorizontalPanel spacing="5" ui:field="exportButtons">
+			<g:Button ui:field="exportCsv">Export as CSV</g:Button>
+			<g:Button ui:field="exportJson">Export as JSON</g:Button>
+		</g:HorizontalPanel>
+		<g:VerticalPanel ui:field="content" />
+	</g:VerticalPanel>
+</ui:UiBinder> 

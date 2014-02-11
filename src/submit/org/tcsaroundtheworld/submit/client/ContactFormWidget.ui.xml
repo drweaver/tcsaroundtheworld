@@ -1,0 +1,71 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.form-error {
+			color: red;
+			font-size: 8pt;
+		}
+		
+		.form-label {
+			font-size: 9pt;
+		}
+	</ui:style>
+	<g:VerticalPanel>
+		<g:Grid>
+			<g:row>
+				<g:customCell>
+					<g:Label>Contact</g:Label>
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field="contact" />
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label>Full Name</g:Label>
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox ui:field="name"  />
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field="nameError" addStyleNames="{style.form-error}" />
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label>Email</g:Label>
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox ui:field="email"  />
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field="emailError" addStyleNames="{style.form-error}" />
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label>Message</g:Label>
+				</g:customCell>
+				<g:customCell>
+					<g:TextArea ui:field="message" visibleLines="10" characterWidth="40" />
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field="messageError" addStyleNames="{style.form-error}" />
+				</g:customCell>
+			</g:row>
+		</g:Grid>
+		<g:VerticalPanel>
+		<g:HorizontalPanel>
+			<g:SimplePanel ui:field="recaptchaContainer" />
+			<g:Label ui:field="recaptchaError" addStyleNames="{style.form-error}" />
+		</g:HorizontalPanel>
+		<g:HorizontalPanel>
+			<g:Button ui:field="send" >Send</g:Button>
+			<g:Button ui:field="cancel">Cancel</g:Button>
+		    <g:Image ui:field="loadingImage" url="img/loading.gif" visible="false" />
+			<g:Label ui:field="sendErrors" addStyleNames="{style.form-error}" />
+		</g:HorizontalPanel>
+		</g:VerticalPanel>
+	</g:VerticalPanel>
+</ui:UiBinder> 

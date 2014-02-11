@@ -1,0 +1,21 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+			 xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+	<h3>About This Site</h3>
+	<p><span ui:field="aboutThisSite"/></p>
+	<h3>About Me</h3>
+	<p><span ui:field="aboutMe"/></p>
+	<h3>Updating Submissions</h3>
+	<p><span ui:field="updatingSubmissions"/></p>
+	<h3>Removing Submissions</h3>
+	<p><span ui:field="removingSubmissions"/></p>
+	<h3>Contact</h3>
+	<p>To contact the administrator for any other reason, please complete the form at <g:Anchor ui:field="contactLink">this link</g:Anchor></p>
+	</g:HTMLPanel>
+</ui:UiBinder>

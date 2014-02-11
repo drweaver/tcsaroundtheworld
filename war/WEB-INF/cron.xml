@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+  <cron>
+    <url>/cron/awaitingapprovals</url>
+    <description>Send notification email of awaiting approvals</description>
+    <schedule>every day 17:00</schedule>
+    <timezone>Europe/London</timezone>
+  </cron>
+</cronentries>

@@ -1,0 +1,23 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.form-error {
+			color: red;
+			font-size: 8pt;
+		}
+	</ui:style>
+	<g:VerticalPanel>
+		<g:HorizontalPanel spacing="10">
+			<g:Anchor href="/">Back to Map</g:Anchor>
+			<g:Anchor ui:field="awaitingapproval" href="javascript:;">Submissions awaiting approval</g:Anchor>
+			<g:Anchor ui:field="all" href="javascript:;">All submissions</g:Anchor>
+			<g:Anchor href="administrator-submission.html">New Submission (with import options)</g:Anchor>
+			<g:Anchor ui:field="tasks" href="javascript:;">Admin tasks</g:Anchor>
+			<g:Anchor
+				href="https://appengine.google.com/dashboard?&amp;app_id=tcsaroundtheworld"
+				target="_blank">AppEngine Console</g:Anchor>
+		</g:HorizontalPanel>
+		<g:SimplePanel ui:field="content"/>
+	</g:VerticalPanel>
+</ui:UiBinder>

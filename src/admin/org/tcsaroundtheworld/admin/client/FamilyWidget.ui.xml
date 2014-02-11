@@ -1,0 +1,22 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.green-border {
+			border: medium;
+			border-color: green;
+			border-style: solid;
+		}
+	</ui:style>
+	<g:VerticalPanel>
+		<g:HorizontalPanel spacing="3" addStyleNames="{style.green-border}">
+			<g:Label>Family ID=</g:Label>
+			<g:Label ui:field="id" />
+			<g:Label ui:field="dateSubmitted"/>
+			<g:Button ui:field="approve">Approve</g:Button>
+			<g:Button ui:field="delete">Delete</g:Button>
+			<g:Image ui:field="loading" visible="false" url="img/loading.gif" />
+		</g:HorizontalPanel>
+		<g:VerticalPanel ui:field="members" />
+	</g:VerticalPanel>
+</ui:UiBinder> 

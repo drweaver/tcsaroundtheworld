@@ -1,0 +1,33 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.form-error {
+			color: red;
+			font-size: 8pt;
+		}
+	</ui:style>
+	<g:VerticalPanel spacing="5">
+		<g:HorizontalPanel>
+			<g:Anchor href="/">Back to Map</g:Anchor>
+		</g:HorizontalPanel>
+		<g:HTML ui:field="introduction"/>
+		<g:VerticalPanel ui:field="personPanel" />
+		<g:HorizontalPanel>
+			<g:Button ui:field="addPerson">Add Family Member</g:Button>
+			<g:Button ui:field="removePerson">Remove Family Member</g:Button>
+		</g:HorizontalPanel>
+		<g:HorizontalPanel>
+			<g:SimplePanel ui:field="recaptchaContainer" />
+			<g:Label ui:field="recaptchaError" addStyleNames="{style.form-error}" />
+		</g:HorizontalPanel>
+		<g:CheckBox ui:field="updatedSubmission">Tick here if this should
+			replace/update an existing submission</g:CheckBox>
+		<g:HorizontalPanel>
+			<g:Button ui:field="submit">Submit</g:Button>
+			<g:Image ui:field="loadingImage" url="img/loading.gif"
+				visible="false" />
+			<g:Label ui:field="submitErrors" addStyleNames="{style.form-error}" />
+		</g:HorizontalPanel>
+	</g:VerticalPanel>
+</ui:UiBinder>

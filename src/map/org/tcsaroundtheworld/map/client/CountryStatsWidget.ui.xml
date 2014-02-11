@@ -1,0 +1,25 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+		<g:HorizontalPanel>
+			<g:HTMLPanel>
+				<h2>Countries</h2>
+				<g:DecoratorPanel>
+					<g:FlexTable ui:field="countryTable" />
+				</g:DecoratorPanel>
+			</g:HTMLPanel>
+			<g:HTMLPanel>
+				<h2>US States</h2>
+				<g:DecoratorPanel>
+					<g:FlexTable ui:field="statesTable" />
+				</g:DecoratorPanel>
+			</g:HTMLPanel>
+		</g:HorizontalPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="src" output="test-classes" path="test"/>
+	<classpathentry kind="src" path="src/map"/>
+	<classpathentry kind="src" path="src/submit"/>
+	<classpathentry kind="src" path="src/admin"/>
+	<classpathentry kind="src" path="src/common"/>
+	<classpathentry kind="src" path="src/gwtfb"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/objectify-2.2.3.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-fileupload-1.2.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtupload-0.6.3.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtupload-gae-0.6.3.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/recaptcha4j-0.0.7.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-recaptcha-1.0.0.Beta2.jar"/>
+	<classpathentry kind="lib" path="lib/gwt-maps-3.0.2b.gwt22.jar"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>
