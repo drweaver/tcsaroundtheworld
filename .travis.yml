@@ -1,4 +1,4 @@
 language: java
 jdk:
   - oraclejdk7
-script: ant test.dev
+script: ant test.dev gwtc
