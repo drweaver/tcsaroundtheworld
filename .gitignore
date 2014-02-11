@@ -24,6 +24,6 @@ reports/
 src/submit/org/tcsaroundtheworld/submit/server/ReCaptchaPrivateKeys.properties
 
 # ignore downloads
-downloads
-gwt-*
-appengine-java-sdk-*
+downloads/
+gwt-*/
+appengine-java-sdk-*/
