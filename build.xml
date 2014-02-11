@@ -67,15 +67,6 @@
   </target>
 
   <target name="gwtc" depends="javac" description="GWT compile to JavaScript">
-	<fail message="Missing ReCaptchaPrivateKeys.properties file">
-		  <condition>
-			  <not>
-				  <resourceexists>
-					  <file file="src/submit/org/tcsaroundtheworld/submit/server/ReCaptchaPrivateKeys.properties"/>
-				  </resourceexists>
-			  </not>
-		  </condition>
-	</fail>
     <java failonerror="true" fork="true" classname="com.google.gwt.dev.Compiler">
       <classpath>
         <pathelement location="src/map"/>
@@ -182,7 +173,17 @@
 
   <target name="hosted" depends="devmode" description="Run development mode (NOTE: the 'hosted' target is deprecated)" />
 
-  <target name="build" depends="gwtc" description="Build this project" />
+  <target name="build" depends="gwtc" description="Build this project and checks for required files" >
+	  <fail message="Missing ReCaptchaPrivateKeys.properties file">
+		  <condition>
+			  <not>
+				  <resourceexists>
+					  <file file="src/submit/org/tcsaroundtheworld/submit/server/ReCaptchaPrivateKeys.properties"/>
+				  </resourceexists>
+			  </not>
+		  </condition>
+	  </fail>
+  </target>
 
   <target name="war" depends="build" description="Create a war file">
     <zip destfile="tcsaroundtheworld.war" basedir="war"/>

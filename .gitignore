@@ -19,6 +19,13 @@ war/administrator/
 war/submission/
 war/map/
 reports/
+war/WEB-INF/lib/appengine-*.jar
+war/WEB-INF/lib/datanucleus-*.jar
+war/WEB-INF/lib/geronimo-*.jar
+war/WEB-INF/lib/gwt-servlet.jar
+war/WEB-INF/lib/jdo2-api-2.3-eb.jar
+war/WEB-INF/lib/jsr107cache-1.1.jar
+war/WEB-INF/lib/libservice.jar
 
 # don't commit private keys
 src/submit/org/tcsaroundtheworld/submit/server/ReCaptchaPrivateKeys.properties
