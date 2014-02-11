@@ -14,3 +14,16 @@ gwt-unitCache/
 # more caches and things from deploy #
 war/WEB-INF/deploy/
 war/WEB-INF/classes/
+war/*JUnit/
+war/administrator/
+war/submission/
+war/map/
+reports/
+
+# don't commit private keys
+src/submit/org/tcsaroundtheworld/submit/server/ReCaptchaPrivateKeys.properties
+
+# ignore downloads
+downloads
+gwt-*
+appengine-java-sdk-*
