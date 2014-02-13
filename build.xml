@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <project name="tcsaroundtheworld" default="build" basedir=".">
   <!-- Configure path to GWT SDK -->
-  <property name="gwt.sdk.version" value="2.4.0" />
+  <property name="gwt.sdk.version" value="2.6.0" />
   <property name="gwt.sdk" location="gwt-${gwt.sdk.version}" />
   <property name="gwt.dl.name" value="gwt-${gwt.sdk.version}.zip" />
   <property name="gwt.dl" value="downloads/${gwt.dl.name}" />
@@ -27,6 +27,7 @@
 		<include name="shared/**/*.jar" />
     </fileset>
 	<fileset dir="lib" includes="gwt-maps-*.jar"/>
+	<fileset dir="lib" includes="gwt-recaptcha-*.jar"/>
   </path>
 
   <target name="check.recaptcha.private.keys">
@@ -179,6 +180,15 @@
 			  <not>
 				  <resourceexists>
 					  <file file="src/submit/org/tcsaroundtheworld/submit/server/ReCaptchaPrivateKeys.properties"/>
+				  </resourceexists>
+			  </not>
+		  </condition>
+	  </fail>
+	  	  <fail message="Missing email.properties file">
+		  <condition>
+			  <not>
+				  <resourceexists>
+					  <file file="src/common/org/tcsaroundtheworld/common/server/email.properties"/>
 				  </resourceexists>
 			  </not>
 		  </condition>

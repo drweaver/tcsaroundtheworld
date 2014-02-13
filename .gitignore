@@ -29,6 +29,8 @@ war/WEB-INF/lib/libservice.jar
 
 # don't commit private keys
 src/submit/org/tcsaroundtheworld/submit/server/ReCaptchaPrivateKeys.properties
+# or email addresses
+src/common/org/tcsaroundtheworld/common/server/email.properties
 
 # ignore downloads
 downloads/

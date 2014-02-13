@@ -15,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 import net.tanesha.recaptcha.ReCaptchaImpl;
 import net.tanesha.recaptcha.ReCaptchaResponse;
 
+import org.tcsaroundtheworld.common.server.EmailProperties;
 import org.tcsaroundtheworld.common.server.db.DAO;
 import org.tcsaroundtheworld.submit.client.SubmissionService;
 import org.tcsaroundtheworld.submit.server.verify.ContactSubmissionVerifier;
@@ -33,9 +34,6 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class SubmissionServiceImpl extends RemoteServiceServlet implements SubmissionService {
 
-	//TODO: read this from property file
-	public static final String ADMIN_ADDRESS = "ADMIN_ADDRESS";
-
 	private static final long serialVersionUID = -4806167515936924401L;
 
 	private final Logger log = Logger.getLogger(SubmissionServiceImpl.class.getName());
@@ -47,6 +45,8 @@ public class SubmissionServiceImpl extends RemoteServiceServlet implements Submi
 	ReCaptchaPrivateKeys reCaptchaPrivateKeys = new ReCaptchaPrivateKeys();
 
 	BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+	
+	EmailProperties emailProperties = new EmailProperties();
 
 	final DAO dao = new DAO();
 
@@ -124,21 +124,21 @@ public class SubmissionServiceImpl extends RemoteServiceServlet implements Submi
 			final Long familyId = contactSubmission.getFamilyId();
 			final Long personId = contactSubmission.getPersonId();
 			final boolean forAdmin = familyId == null || personId == null;
-			final String email = forAdmin ?	ADMIN_ADDRESS : dao.getPersonEmail(familyId, personId);
+			final String email = forAdmin ?	emailProperties.getAdminAddress() : dao.getPersonEmail(familyId, personId);
 			if( email == null ) {
 				return SubmissionStatus.failure("An error occurred whilst retrieving contact details");
 			}
 			final Properties props = new Properties();
 			final Session session = Session.getDefaultInstance(props, null);
 			final Message msg = new MimeMessage(session);
-			msg.setFrom(new InternetAddress(ADMIN_ADDRESS, "TCS Around the World Admin"));
+			msg.setFrom(new InternetAddress(emailProperties.getAdminAddress(), "TCS Around the World Admin"));
 			msg.setReplyTo( new Address[] {
 					new InternetAddress(contactSubmission.getEmail(), contactSubmission.getName())
 			} );
 			msg.addRecipient(Message.RecipientType.TO,	new InternetAddress(email));
 			if( !forAdmin ) {
 				msg.addRecipient(Message.RecipientType.CC,
-						new InternetAddress(ADMIN_ADDRESS, "TCS Around the World Admin"));
+						new InternetAddress(emailProperties.getAdminAddress(), "TCS Around the World Admin"));
 			}
 			msg.setSubject("Contact Messsage from TCS Around the World");
 			msg.setText( contactSubmission.getMessage() );
@@ -151,5 +151,6 @@ public class SubmissionServiceImpl extends RemoteServiceServlet implements Submi
 
 		return SubmissionStatus.success();
 	}
+
 
 }

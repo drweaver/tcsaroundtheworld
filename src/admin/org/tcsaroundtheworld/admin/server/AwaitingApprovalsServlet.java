@@ -16,19 +16,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.tcsaroundtheworld.admin.client.AdminControl;
+import org.tcsaroundtheworld.common.server.EmailProperties;
 import org.tcsaroundtheworld.common.server.db.DAO;
 
 
 @SuppressWarnings("serial")
 public class AwaitingApprovalsServlet extends HttpServlet {
 
-	//TODO: Load these addresses from property file
-	public static final String OTHER_ADDRESS = "OTHER_ADDRESS";
-	public static final String ADMIN_ADDRESS = "ADMIN_ADDRESS";
-
 	Logger log = Logger.getLogger(AwaitingApprovalsServlet.class.getName());
 
 	private final DAO dao = new DAO();
+	
+	private final EmailProperties emailProperties = new EmailProperties();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)	throws ServletException, IOException {
@@ -39,11 +38,9 @@ public class AwaitingApprovalsServlet extends HttpServlet {
 				Properties props = new Properties();
 				Session session = Session.getDefaultInstance(props, null);
 				Message msg = new MimeMessage(session);
-				msg.setFrom(new InternetAddress(ADMIN_ADDRESS, "TCS Around the World Admin"));
+				msg.setFrom(new InternetAddress(emailProperties.getAdminAddress(), "TCS Around the World Admin"));
 				msg.addRecipient(Message.RecipientType.TO,
-						new InternetAddress(ADMIN_ADDRESS, "Vicki Macklin"));
-				msg.addRecipient(Message.RecipientType.TO,
-						new InternetAddress(OTHER_ADDRESS, "Shane Weaver"));
+						new InternetAddress(emailProperties.getAdminAddress()));
 
 				msg.setSubject("Approvals waiting for TCS Around the World");
 				StringBuilder sb = new StringBuilder();
