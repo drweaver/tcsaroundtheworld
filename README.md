@@ -11,10 +11,13 @@ Add file:
 src/submit/org/tcsaroundtheworld/submit/server/ReCaptchaPrivateKeys.properties
 ```
 
-Edit email addresses in:
+Add admin email address in:
 ```
-src/admin/org/tcsaroundtheworld/admin/server/AwaitingApprovalsServlet.java
-src/submit/org/tcsaroundtheworld/submit/server/SubmissionServiceImpl.java
+src/common/org/tcsaroundtheworld/common/server/email.properties
+```
+e.g.:
+```
+admin = myemail@domain.com
 ```
 
 Install Ant and JDK7
