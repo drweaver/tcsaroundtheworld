@@ -41,9 +41,7 @@ public class SubmissionServiceImpl extends RemoteServiceServlet implements Submi
 	PersonVerifierServer personVerifier = new PersonVerifierServer();
 
 	ContactSubmissionVerifier contactSubmissionVerifier = new ContactSubmissionVerifier();
-
-	ReCaptchaPrivateKeys reCaptchaPrivateKeys = new ReCaptchaPrivateKeys();
-
+	
 	BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 	
 	EmailProperties emailProperties = new EmailProperties();
@@ -61,7 +59,7 @@ public class SubmissionServiceImpl extends RemoteServiceServlet implements Submi
 			final ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
 			final String host = ReCaptchaHost.clean(this.getThreadLocalRequest().getServerName());
 			log.info("Setting recaptcha private key for host: " + host);
-			reCaptcha.setPrivateKey(reCaptchaPrivateKeys.privateKeys().get(host));
+			reCaptcha.setPrivateKey(new ReCaptchaPrivateKeys().privateKeys().get(host));
 			final ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, fields.getChallenge(), fields.getResponse());
 			final boolean valid = reCaptchaResponse.isValid();
 			if( !valid ) {
