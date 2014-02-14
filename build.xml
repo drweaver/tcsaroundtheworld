@@ -43,6 +43,11 @@
   <target name="libs" depends="dep" description="Copy libs to WEB-INF/lib">
     <mkdir dir="war/WEB-INF/lib" />
     <copy todir="war/WEB-INF/lib" file="${gwt.sdk}/gwt-servlet.jar" />
+    <copy todir="war/WEB-INF/lib" flatten="true">
+        <fileset dir="${gwt.sdk}">
+        	<include name="validation-api-*.jar" />
+        </fileset>
+    </copy>
     <!-- Add any additional server libs that need to be copied -->
 	<copy todir="war/WEB-INF/lib" flatten="true">
 		<fileset dir="${gae.sdk}/lib/user">
