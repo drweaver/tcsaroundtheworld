@@ -27,13 +27,10 @@
 		<include name="shared/**/*.jar" />
     </fileset>
 	<fileset dir="lib" includes="gwt-maps-*.jar"/>
+	<!--  
 	<fileset dir="lib" includes="gwt-recaptcha-*.jar"/>
+	-->
   </path>
-
-  <target name="check.recaptcha.private.keys">
-    <available file="src/submit/org/tcsaroundtheworld/submit/server/ReCaptchaPrivateKeys.properties2" property="recaptcha.present"/>
-	
-  </target>
 
   <target name="dep" description="Download dependencies">
 	<mkdir dir="downloads"/>
@@ -75,6 +72,7 @@
 		<pathelement location="src/admin"/>
 		<pathelement location="src/common"/>
 		<pathelement location="src/gwtfb"/>
+		<pathelement location="src/gwt-recaptcha"/>
         <path refid="project.class.path"/>
       </classpath>
       <!-- add jvmarg -Xss16M or similar if you see a StackOverflowError -->
@@ -94,6 +92,8 @@
 		  <pathelement location="src/admin"/>
 		  <pathelement location="src/common"/>
 		  <pathelement location="src/gwtfb"/>
+		  <pathelement location="src/gwt-recaptcha"/>
+        
         <path refid="project.class.path"/>
       </classpath>
       <jvmarg value="-Xmx256M"/>
@@ -127,6 +127,8 @@
 		  <pathelement location="src/admin"/>
 		  <pathelement location="src/common"/>
 		  <pathelement location="src/gwtfb"/>
+		  <pathelement location="src/gwt-recaptcha"/>
+        
         <pathelement location="test" />
         <path refid="project.class.path" />
         <pathelement location="lib/junit-3.8.2.jar" />
@@ -153,6 +155,8 @@
 		  <pathelement location="src/admin"/>
 		  <pathelement location="src/common"/>
 		  <pathelement location="src/gwtfb"/>
+		  <pathelement location="src/gwt-recaptcha"/>
+        
         <pathelement location="test" />
         <path refid="project.class.path" />
         <pathelement location="lib/junit-3.8.2.jar" />

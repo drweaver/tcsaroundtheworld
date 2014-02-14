@@ -58,7 +58,7 @@ public class ContactFormWidget extends Composite {
 	@UiField Button cancel;
 
 	final ReCaptchaKeyConstants reCaptchaKeyConstants = GWT.create(ReCaptchaKeyConstants.class);
-	private final RecaptchaWidget recaptchaWidget = new RecaptchaWidget(reCaptchaKeyConstants.publicKeys().get(ReCaptchaHost.clean(Location.getHost())));
+	private RecaptchaWidget recaptchaWidget;
 
 	private final SubmissionVerifier submissionVerifier = new SubmissionVerifier();
 
@@ -107,6 +107,7 @@ public class ContactFormWidget extends Composite {
 		//submissionVerifier.add(new TextAreaVerifier("message", true, new MessageValidator(), messageError, message) );
 
 		if( GWT.isProdMode() ) {
+			recaptchaWidget = new RecaptchaWidget(reCaptchaKeyConstants.publicKeys().get(ReCaptchaHost.clean(Location.getHost())), "en", "red");
 			recaptchaContainer.add( recaptchaWidget );
 			submissionVerifier.add(new ReCaptchaFieldVerifier(recaptchaError, recaptchaWidget));
 		}

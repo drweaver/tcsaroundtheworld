@@ -1,6 +1,5 @@
 package org.tcsaroundtheworld.map.client;
 
-import org.tcsaroundtheworld.common.client.DateParserClient;
 import org.tcsaroundtheworld.common.shared.PersonBase;
 import org.tcsaroundtheworld.common.shared.PersonId;
 

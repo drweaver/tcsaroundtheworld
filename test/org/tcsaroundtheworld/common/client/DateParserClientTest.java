@@ -8,7 +8,7 @@ public class DateParserClientTest extends GWTTestCase {
 
 	@Override
 	public String getModuleName() {
-		return "org.tcsaroundtheworld.submit.Submission";
+		return "org.tcsaroundtheworld.common.Common";
 	}
 
 	public void testParse() {

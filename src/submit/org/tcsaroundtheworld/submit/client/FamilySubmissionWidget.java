@@ -68,7 +68,7 @@ public class FamilySubmissionWidget extends Composite {
 
 		if( GWT.isProdMode() ) {
 			final ReCaptchaKeyConstants reCaptchaKeyConstants = GWT.create(ReCaptchaKeyConstants.class);
-			recaptchaWidget = new RecaptchaWidget(reCaptchaKeyConstants.publicKeys().get(ReCaptchaHost.clean(Location.getHost())));
+			recaptchaWidget = new RecaptchaWidget(reCaptchaKeyConstants.publicKeys().get(ReCaptchaHost.clean(Location.getHost())), "en", "red");
 			recaptchaContainer.add( recaptchaWidget );
 		}
 
