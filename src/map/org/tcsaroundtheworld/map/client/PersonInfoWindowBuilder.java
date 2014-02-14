@@ -11,12 +11,14 @@ import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
+import com.google.gwt.safehtml.shared.SafeUri;
+import com.google.gwt.safehtml.shared.UriUtils;
 
 public class PersonInfoWindowBuilder {
 
 	public interface HtmlTemplates extends SafeHtmlTemplates {
 		@Template("<img style='padding: 3px;' width=\"{0}\" height=\"{0}\" src=\"{1}\"/>")
-		SafeHtml img( int size, String url );
+		SafeHtml img( int size, SafeUri url );
 		@Template("<span class='person-info-name'>{0} {1}</span>")
 		SafeHtml name( String name, String surname);
 		@Template("<span>{1}, {2}</span>")
@@ -49,7 +51,7 @@ public class PersonInfoWindowBuilder {
 		final SafeHtmlBuilder sb = new SafeHtmlBuilder();
 		sb.appendHtmlConstant("<div style='float:right'>");
 		if( p.getPictureReference() != null  ) {
-			sb.append(htmlTemplates.img(IMG_SIZE, p.getPictureReference().getServingUrl(IMG_SIZE)));
+			sb.append(htmlTemplates.img(IMG_SIZE, UriUtils.fromString(p.getPictureReference().getServingUrl(IMG_SIZE))));
 			sb.appendHtmlConstant("<br/>");
 		}
 		final String name = p.getName() + ' ' + p.getSurname();

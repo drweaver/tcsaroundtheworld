@@ -16,5 +16,5 @@
         <inherits name="com.google.gwt.user.User"/>
         <!-- 
          -->
-        <script src="http://www.google.com/recaptcha/api/js/recaptcha.js"/>
+        <script src="/js/recaptcha.js"/>
 </module>

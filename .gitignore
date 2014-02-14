@@ -1,5 +1,10 @@
 *.class
 
+/junit*.properties
+/test-classes/
+/war/WEB-INF/lib/.DS_Store
+/www-test/
+
 # Package Files #
 #*.jar
 *.war
