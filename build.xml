@@ -11,7 +11,7 @@
   <property name="gae.dl.name" value="appengine-java-sdk-${gae.sdk.version}.zip" />
   <property name="gae.dl" value="downloads/${gae.dl.name}" />
   
-  <property name="src" value="src/map:src/submit:src/admin:src/common:src/gwtfb" />
+  <property name="src" value="src/map:src/submit:src/admin:src/common:src/gwtfb:src/gwt-recaptcha" />
   
   <property name="module.map" value="org.tcsaroundtheworld.map.Map"/>
   <property name="module.submit" value="org.tcsaroundtheworld.submit.Submission"/>
