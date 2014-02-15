@@ -47,6 +47,9 @@ class TreacherCollinsMapWidget extends Composite implements ValueChangeHandler<S
 
 	final PersonInfoWindowBuilder personInfoWindowBuilder = new PersonInfoWindowBuilder();
 
+	final DataLoadingDialog dataLoadingDialog = new DataLoadingDialog();
+	private boolean dataLoaded = false;
+
 	private final RecentMembersWidget recent = new RecentMembersWidget();
 
 	public interface InfoWindowTemplates extends SafeHtmlTemplates {
@@ -69,10 +72,14 @@ class TreacherCollinsMapWidget extends Composite implements ValueChangeHandler<S
 		mapWidget = new MapWidget(mapOptions);
 		mapWidget.setSize("100%", "100%");
 		mapService.getFamilies(new AsyncCallback<List<Family>>() {
+			@Override
 			public void onFailure(final Throwable caught) {
 				GWT.log("Failed to load families", caught);
 			}
+			@Override
 			public void onSuccess(final List<Family> result) {
+				dataLoaded = true;
+				dataLoadingDialog.hide();
 				createFamilyMarkers(result);
 				createCountryMarkers(result);
 				recent.populate(result, 5);
@@ -87,6 +94,7 @@ class TreacherCollinsMapWidget extends Composite implements ValueChangeHandler<S
 
 		initWidget(mapWidget);
 
+
 		MapRegionControl.WORLD.fitToBounds(mapWidget);
 
 		MapRegionControl.addDefaultControls(mapWidget);
@@ -99,6 +107,9 @@ class TreacherCollinsMapWidget extends Composite implements ValueChangeHandler<S
 
 		new RecentMembersControl().add(mapWidget, recent);
 
+		if( dataLoaded == false ) {
+			dataLoadingDialog.center();
+		}
 	}
 
 	public void reset() {
@@ -239,6 +250,7 @@ class TreacherCollinsMapWidget extends Composite implements ValueChangeHandler<S
 		var mc = new $wnd.MarkerClusterer(map, markerArray, mcOptions);
 	}-*/;
 
+	@Override
 	public void onValueChange(final ValueChangeEvent<String> event) {
 		final String[] tokens = event.getValue().split("/");
 		if( tokens.length > 1 && tokens[0].toUpperCase().equals("PERSON" ) ) {

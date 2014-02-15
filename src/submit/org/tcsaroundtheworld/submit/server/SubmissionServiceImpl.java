@@ -44,7 +44,7 @@ public class SubmissionServiceImpl extends RemoteServiceServlet implements Submi
 
 	final DAO dao = new DAO();
 
-	private boolean isProdMode() {
+	public static boolean isProdMode() {
 		return SystemProperty.environment.value() == SystemProperty.Environment.Value.Production;
 	}
 

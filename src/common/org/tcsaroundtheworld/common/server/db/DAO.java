@@ -13,6 +13,7 @@ import org.tcsaroundtheworld.common.shared.PersonPublic;
 import org.tcsaroundtheworld.common.shared.PictureReference;
 import org.tcsaroundtheworld.map.server.LocationStatsCollector;
 import org.tcsaroundtheworld.map.shared.LocationStats;
+import org.tcsaroundtheworld.submit.server.SubmissionServiceImpl;
 import org.tcsaroundtheworld.submit.shared.FamilySubmission;
 import org.tcsaroundtheworld.submit.shared.PersonSubmission;
 
@@ -93,6 +94,13 @@ public class DAO {
 	}
 
 	public List<Family> getFamiliesForPublic() {
+		if( !SubmissionServiceImpl.isProdMode() ) {
+			try {
+				Thread.sleep(19000);
+			} catch (InterruptedException e) {
+				//NOOP
+			}
+		}
 		long startTime = System.currentTimeMillis();
 		Objectify ofy = ObjectifyService.begin();
 		final List<Family> families = new ArrayList<Family>();
@@ -112,25 +120,6 @@ public class DAO {
 			families.add( family );
 		}
 		log.info("getFamiliesForPublic mod taken "+(System.currentTimeMillis()-startTime)+"ms");
-		return families;
-	}
-
-	public List<Family> getFamiliesForPublic_bak() {
-		long startTime = System.currentTimeMillis();
-		Objectify ofy = ObjectifyService.begin();
-		final List<Family> families = new ArrayList<Family>();
-		for( final FamilyEntity f : ofy.query(FamilyEntity.class).filter("approved =", true) ) {
-			final Family family = new Family(f);
-			final List<PersonPublic> members = new ArrayList<PersonPublic>();
-			for( final PersonEntity p : ofy.query(PersonEntity.class).ancestor(f).filter("enabled =", true) ) {
-				final PersonPublic pb = new PersonPublic();
-				pb.accept( p.createCopyVisitor() );
-				members.add( pb );
-			}
-			family.setMembers(members);
-			families.add( family );
-		}
-		log.info("getFamiliesForPublic taken "+(System.currentTimeMillis()-startTime)+"ms");
 		return families;
 	}
 
