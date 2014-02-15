@@ -27,8 +27,6 @@ import org.tcsaroundtheworld.submit.shared.ReCaptchaFields;
 import org.tcsaroundtheworld.submit.shared.ReCaptchaHost;
 import org.tcsaroundtheworld.submit.shared.SubmissionStatus;
 
-import com.google.appengine.api.blobstore.BlobstoreService;
-import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.utils.SystemProperty;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -41,9 +39,7 @@ public class SubmissionServiceImpl extends RemoteServiceServlet implements Submi
 	PersonVerifierServer personVerifier = new PersonVerifierServer();
 
 	ContactSubmissionVerifier contactSubmissionVerifier = new ContactSubmissionVerifier();
-	
-	BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-	
+
 	EmailProperties emailProperties = new EmailProperties();
 
 	final DAO dao = new DAO();
@@ -52,6 +48,7 @@ public class SubmissionServiceImpl extends RemoteServiceServlet implements Submi
 		return SystemProperty.environment.value() == SystemProperty.Environment.Value.Production;
 	}
 
+	@Override
 	public boolean isCaptchaValid(final ReCaptchaFields fields) {
 
 		if( isProdMode() ) {
@@ -71,6 +68,7 @@ public class SubmissionServiceImpl extends RemoteServiceServlet implements Submi
 		}
 	}
 
+	@Override
 	public SubmissionStatus submitNewFamily(final FamilySubmission f, final ReCaptchaFields reCaptchaFields) {
 		if( !isCaptchaValid(reCaptchaFields) ) {
 			return SubmissionStatus.failure("The ReCaptcha challenge was incorrect");
@@ -103,10 +101,7 @@ public class SubmissionServiceImpl extends RemoteServiceServlet implements Submi
 		return SubmissionStatus.success();
 	}
 
-	public String getPictureUploadPath() {
-		return blobstoreService.createUploadUrl("/pictureupload");
-	}
-
+	@Override
 	public SubmissionStatus submitContactRequest(final ContactSubmission contactSubmission,	final ReCaptchaFields reCaptchaFields) {
 		if( !isCaptchaValid(reCaptchaFields) ) {
 			return SubmissionStatus.failure("The ReCaptcha challenge was incorrect");

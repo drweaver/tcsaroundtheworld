@@ -16,12 +16,12 @@ import org.tcsaroundtheworld.map.shared.LocationStats;
 import org.tcsaroundtheworld.submit.shared.FamilySubmission;
 import org.tcsaroundtheworld.submit.shared.PersonSubmission;
 
+import com.google.appengine.api.datastore.QueryResultIterator;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.helper.DAOBase;
 
-public class DAO extends DAOBase {
+public class DAO {
 
 	Logger log = Logger.getLogger(DAO.class.getName());
 
@@ -32,7 +32,7 @@ public class DAO extends DAOBase {
 	}
 
 	public void storeFamily(final FamilySubmission f) {
-		final Objectify ofy = fact().beginTransaction();
+		Objectify ofy = ObjectifyService.beginTransaction();
 		final List<Objectify> ofyList = new ArrayList<Objectify>();
 		try {
 
@@ -48,12 +48,12 @@ public class DAO extends DAOBase {
 				ofy.put(pe);
 				final PictureReference pic = p.getBase().getPictureReference();
 				if( pic != null ) {
-					if( ofy().query(PictureEntity.class).filter("id =", pic.getId()).fetchKeys().iterator().hasNext() ) {
+					if( ofy.query(PictureEntity.class).filter("id =", pic.getId()).fetchKeys().iterator().hasNext() ) {
 						log.info("Picture already exists, must be a re-import, not persisting image with id="+pic.getId());
 					} else {
 						final PictureEntity pictureEntity = PictureEntity.fromMemCache(pic);
 						log.info("Storing "+pictureEntity.toString());
-						final Objectify ofyForPic = fact().beginTransaction();
+						final Objectify ofyForPic = ObjectifyService.beginTransaction();
 						ofyList.add( ofyForPic );
 						ofyForPic.put( pictureEntity );
 					}
@@ -79,10 +79,10 @@ public class DAO extends DAOBase {
 	}
 
 	public LocationStats getCountryStats() {
+		Objectify ofy = ObjectifyService.begin();
 		final LocationStatsCollector statsCollector = new LocationStatsCollector();
-
-		for( final FamilyEntity f : ofy().query(FamilyEntity.class).filter("approved =", true) ) {
-			for( final PersonEntity p : ofy().query(PersonEntity.class).ancestor(f).filter("enabled =", true) ) {
+		for( final FamilyEntity f : ofy.query(FamilyEntity.class).filter("approved =", true) ) {
+			for( final PersonEntity p : ofy.query(PersonEntity.class).ancestor(f).filter("enabled =", true) ) {
 				statsCollector.incrementCountry(p.country);
 				if( p.country != null && ( p.country.equals("US") || p.country.equals("USA") || p.country.equals("United States") ) ) {
 					statsCollector.incrementUsCounty(p.state);
@@ -93,11 +93,17 @@ public class DAO extends DAOBase {
 	}
 
 	public List<Family> getFamiliesForPublic() {
+		long startTime = System.currentTimeMillis();
+		Objectify ofy = ObjectifyService.begin();
 		final List<Family> families = new ArrayList<Family>();
-		for( final FamilyEntity f : ofy().query(FamilyEntity.class).filter("approved =", true) ) {
-			final Family family = new Family(f);
+		QueryResultIterator<FamilyEntity> familyIterator = ofy.query(FamilyEntity.class).filter("approved =", true).iterator();
+		while( familyIterator.hasNext() ) {
+			FamilyEntity f = familyIterator.next();
+			Family family = new Family(f);
 			final List<PersonPublic> members = new ArrayList<PersonPublic>();
-			for( final PersonEntity p : ofy().query(PersonEntity.class).ancestor(f).filter("enabled =", true) ) {
+			QueryResultIterator<PersonEntity> personIterator = ofy.query(PersonEntity.class).ancestor(f).filter("enabled =", true).iterator();
+			while( personIterator.hasNext() ) {
+				PersonEntity p = personIterator.next();
 				final PersonPublic pb = new PersonPublic();
 				pb.accept( p.createCopyVisitor() );
 				members.add( pb );
@@ -105,15 +111,36 @@ public class DAO extends DAOBase {
 			family.setMembers(members);
 			families.add( family );
 		}
+		log.info("getFamiliesForPublic mod taken "+(System.currentTimeMillis()-startTime)+"ms");
+		return families;
+	}
+
+	public List<Family> getFamiliesForPublic_bak() {
+		long startTime = System.currentTimeMillis();
+		Objectify ofy = ObjectifyService.begin();
+		final List<Family> families = new ArrayList<Family>();
+		for( final FamilyEntity f : ofy.query(FamilyEntity.class).filter("approved =", true) ) {
+			final Family family = new Family(f);
+			final List<PersonPublic> members = new ArrayList<PersonPublic>();
+			for( final PersonEntity p : ofy.query(PersonEntity.class).ancestor(f).filter("enabled =", true) ) {
+				final PersonPublic pb = new PersonPublic();
+				pb.accept( p.createCopyVisitor() );
+				members.add( pb );
+			}
+			family.setMembers(members);
+			families.add( family );
+		}
+		log.info("getFamiliesForPublic taken "+(System.currentTimeMillis()-startTime)+"ms");
 		return families;
 	}
 
 	public List<FamilyFull> getFamiliesForAdmin() {
+		Objectify ofy = ObjectifyService.begin();
 		final List<FamilyFull> families = new ArrayList<FamilyFull>();
-		for( final FamilyEntity f : ofy().query(FamilyEntity.class) ) {
+		for( final FamilyEntity f : ofy.query(FamilyEntity.class) ) {
 			final FamilyFull family = new FamilyFull( f );
 			final List<PersonFull> members = new ArrayList<PersonFull>();
-			for( final PersonEntity p : ofy().query(PersonEntity.class).ancestor(f) ) {
+			for( final PersonEntity p : ofy.query(PersonEntity.class).ancestor(f) ) {
 				final PersonFull pf = new PersonFull();
 				pf.accept( p.createCopyVisitor() );
 				members.add( pf );
@@ -125,13 +152,14 @@ public class DAO extends DAOBase {
 	}
 
 	public String getPersonEmail(final Long familyId, final Long personId  ) {
+		Objectify ofy = ObjectifyService.begin();
 		final Key<FamilyEntity> familyKey = new Key<FamilyEntity>(FamilyEntity.class, familyId);
-		final FamilyEntity f = ofy().get(familyKey);
+		final FamilyEntity f = ofy.get(familyKey);
 		if( f == null || !f.approved  ) {
 			return null;
 		}
 		final Key<PersonEntity> personKey = new Key<PersonEntity>(familyKey, PersonEntity.class, personId);
-		final PersonEntity p = ofy().get(personKey);
+		final PersonEntity p = ofy.get(personKey);
 		if( p == null || !p.enabled || !p.contactable ) {
 			return null;
 		}
@@ -139,37 +167,43 @@ public class DAO extends DAOBase {
 	}
 
 	public Picture getPicture(final String ref) {
-		final PictureEntity pictureEntity = ofy().get( PictureEntity.class, ref );
+		Objectify ofy = ObjectifyService.begin();
+		final PictureEntity pictureEntity = ofy.get( PictureEntity.class, ref );
 		return pictureEntity.toPicture();
 	}
 
 	public void enablePerson(final long familyId, final long id, final Boolean value) {
+		Objectify ofy = ObjectifyService.begin();
 		final Key<FamilyEntity> familyKey = new Key<FamilyEntity>(FamilyEntity.class, familyId);
 		final Key<PersonEntity> personKey = new Key<PersonEntity>(familyKey, PersonEntity.class, id);
-		final PersonEntity p = ofy().get(personKey);
+		final PersonEntity p = ofy.get(personKey);
 		p.enabled = value;
-		ofy().put( p );
+		ofy.put( p );
 	}
 
 	public void approveFamily(final long id) {
+		Objectify ofy = ObjectifyService.begin();
 		final Key<FamilyEntity> familyKey = new Key<FamilyEntity>(FamilyEntity.class, id);
-		final FamilyEntity f = ofy().get(familyKey);
+		final FamilyEntity f = ofy.get(familyKey);
 		f.approved = true;
-		ofy().put( f );
+		ofy.put( f );
 	}
 
 	public void deletePerson(final long id) {
-		ofy().delete(PersonEntity.class, id);
+		Objectify ofy = ObjectifyService.begin();
+		ofy.delete(PersonEntity.class, id);
 	}
 
 	public void deleteFamily(final long id) {
-		final FamilyEntity f = ofy().get(FamilyEntity.class,id);
-		ofy().delete( ofy().query(PersonEntity.class).ancestor(f) );
-		ofy().delete(f);
+		Objectify ofy = ObjectifyService.begin();
+		final FamilyEntity f = ofy.get(FamilyEntity.class,id);
+		ofy.delete( ofy.query(PersonEntity.class).ancestor(f) );
+		ofy.delete(f);
 	}
 
 	public int familiesAwaitingApproval() {
-		return ofy().query(FamilyEntity.class).filter("approved = ", false).count();
+		Objectify ofy = ObjectifyService.begin();
+		return ofy.query(FamilyEntity.class).filter("approved = ", false).count();
 	}
 
 }

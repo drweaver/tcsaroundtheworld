@@ -15,8 +15,6 @@ public interface SubmissionService extends RemoteService {
 
 	SubmissionStatus submitNewFamily(FamilySubmission nf, ReCaptchaFields reCaptchaFields);
 
-	String getPictureUploadPath();
-
 	SubmissionStatus submitContactRequest(ContactSubmission contactSubmission,	ReCaptchaFields reCaptchaFields);
 
 }

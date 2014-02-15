@@ -13,8 +13,6 @@ public interface SubmissionServiceAsync {
 
 	void submitNewFamily(FamilySubmission nf, ReCaptchaFields reCaptchaFields,	AsyncCallback<SubmissionStatus> asyncCallback);
 
-	void getPictureUploadPath(AsyncCallback<String> asyncCallback);
-
 	void submitContactRequest(ContactSubmission contactSubmission,
 			ReCaptchaFields reCaptchaFields,
 			AsyncCallback<SubmissionStatus> asyncCallback);
