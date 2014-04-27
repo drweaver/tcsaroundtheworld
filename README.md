@@ -4,6 +4,18 @@
 
 A site for sharing location of people with Treacher Collins Syndrome hosted at http://tcsaroundtheworld.appspot.com/
 
+##Design & Technologies
+
+ - Hosted at [Google App Engine](https://developers.google.com/appengine/docs/whatisgoogleappengine) making use of:
+   - Admin Access
+   - Datastore
+   - Image Service
+   - Job schedule (cron)
+   - Mail Service
+ - [Google Web Toolkit](http://www.gwtproject.org) (java to javascript, UI Widgets)
+ - [ReCaptcha](https://www.google.com/recaptcha/intro/index.html)
+ - [Google Maps API v2](https://developers.google.com/maps/documentation/javascript/v2/reference?csw=1)
+
 ##Deploying
 
 Add file:
