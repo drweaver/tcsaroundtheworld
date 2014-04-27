@@ -2,7 +2,7 @@
 
 ##TCS Around the World
 
-A site for sharing location of people with Treacher Collins Syndrome hosted at [http://tcsaroundtheworld.appspot.com/]
+A site for sharing location of people with Treacher Collins Syndrome hosted at http://tcsaroundtheworld.appspot.com/
 
 ##Deploying
 
