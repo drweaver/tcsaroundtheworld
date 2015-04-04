@@ -49,7 +49,8 @@ public class DAO {
 				ofy.put(pe);
 				final PictureReference pic = p.getBase().getPictureReference();
 				if( pic != null ) {
-					if( ofy.query(PictureEntity.class).filter("id =", pic.getId()).fetchKeys().iterator().hasNext() ) {
+					Objectify ofyForPicCheck = ObjectifyService.begin();
+					if( ofyForPicCheck.query(PictureEntity.class).filter("id =", pic.getId()).fetchKeys().iterator().hasNext() ) {
 						log.info("Picture already exists, must be a re-import, not persisting image with id="+pic.getId());
 					} else {
 						final PictureEntity pictureEntity = PictureEntity.fromMemCache(pic);

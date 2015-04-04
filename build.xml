@@ -6,7 +6,9 @@
   <property name="gwt.dl.name" value="gwt-${gwt.sdk.version}.zip" />
   <property name="gwt.dl" value="downloads/${gwt.dl.name}" />
   
-  <property name="gae.sdk.version" value="1.8.9" />
+	
+  <!-- https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.18.zip --> 
+  <property name="gae.sdk.version" value="1.9.18" />
   <property name="gae.sdk" location="appengine-java-sdk-${gae.sdk.version}"/>
   <property name="gae.dl.name" value="appengine-java-sdk-${gae.sdk.version}.zip" />
   <property name="gae.dl" value="downloads/${gae.dl.name}" />
@@ -36,7 +38,7 @@
 	<mkdir dir="downloads"/>
 	<get dest="${gwt.dl}" skipexisting="true" src="https://google-web-toolkit.googlecode.com/files/${gwt.dl.name}"/>
 	<unzip src="${gwt.dl}" dest="${basedir}" overwrite="false" />
-	<get dest="${gae.dl}" skipexisting="true" src="http://googleappengine.googlecode.com/files/${gae.dl.name}"/>
+	<get dest="${gae.dl}" skipexisting="true" src="https://storage.googleapis.com/appengine-sdks/featured/${gae.dl.name}"/>
 	<unzip src="${gae.dl}" dest="${basedir}" overwrite="false" />
   </target>
 
