@@ -26,7 +26,13 @@ public class PersonVerifierTest extends GWTTestCase {
 	public void testSimpleText() {
 		final SubmissionValueVerifier v = new NameValidator();
 		assertVerifier( v, true,  Arrays.asList("Shane", "Vicki", "Sarah-Phillips", "Tommy welsh", "T." ) );
-		assertVerifier( v, false, Arrays.asList("<h1>shane</h1>", "inj \"", "<!-- comment -->", " ", ".-", "shane, weaver", null));
+		assertVerifier( v, false, Arrays.asList("<h1>shane</h1>", "inj \"", "<!-- comment -->", " ", "shane, weaver", null));
+		
+	}
+	
+	public void testInternationalCharacters() {
+		final SubmissionValueVerifier v = new NameValidator();
+ 		assertVerifier( v, true,  Arrays.asList("K\u00f8benhavn") );
 	}
 
 	public void testScentence() {
